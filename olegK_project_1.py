@@ -43,19 +43,44 @@ class variant:  # создания варианта с примерами
             for j in range(self.colvo):
                 sign = random.choice(self.signal)
                 if self.addi is True and sign == 1:  # примеры с +
+                    if self.pere == 4:
+                        a = 4
+                        b = 4
+                        c = 3
+                        d = 2
+                    elif self.pere == 3:
+                        a = 3
+                        b = 2
+                        c = 1
+                        d = 1
+                    elif self.pere == 2:
+                        a = 2
+                        b = 1
+                        c = 1
+                        d = 1
+                    fir = random.randrange(1, (self.number + 1) // a)
+                    sec = random.randrange(1, (self.number + 1) // b)
+                    thir = random.randrange(1, (self.number + 1) // c)
+                    four = random.randrange(1, (self.number + 1) // d)
                     while 0 == 0:
-                        fir = random.randrange(1, self.number)
-                        sec = random.randrange(1, self.number)
-                        thir = random.randrange(1, self.number)
-                        four = random.randrange(1, self.number)
                         if self.pere == 2:  # выставление нужного кол-ва пременных
                             summ = fir + sec
-                        if self.pere == 3:
+                            if summ <= self.number:
+                                break
+                            else:
+                                sec = random.randrange(1, (self.number + 1) // b)
+                        elif self.pere == 3:
                             summ = fir + sec + thir
-                        if self.pere == 4:
+                            if summ <= self.number:
+                                break
+                            else:
+                                thir = random.randrange(1, (self.number + 1) // c)
+                        elif self.pere == 4:
                             summ = fir + sec + thir + four
-                        if summ <= self.number:
-                            break
+                            if summ <= self.number:
+                                break
+                            else:
+                                four = random.randrange(1, (self.number + 1) // d)
                     if self.pere == 2:
                         file.write('{0}) {1} + {2} =  \n'.format(j + 1,
                                                                  fir, sec, summ))
@@ -67,20 +92,30 @@ class variant:  # создания варианта с примерами
                         file.write('{0}) {1} + {2} + {3} + {4} =  \n'.format(j + 1,
                                                                              fir, sec, thir,
                                                                              four, summ))
-                if self.sub is True and sign == 2:  # примеры с -
+                elif self.sub is True and sign == 2:  # примеры с -
+                    fir = self.number + 1
+                    sec = random.randrange(1, (self.number + 1) // 2)
+                    thir = random.randrange(1, (self.number + 1) // 3)
+                    four = 1
                     while 0 == 0:
-                        fir = random.randrange(1, self.number)
-                        sec = random.randrange(1, self.number)
-                        thir = random.randrange(1, self.number)
-                        four = random.randrange(1, self.number)
-                        if self.pere == 2:
+                        if self.pere == 2:  # выставление нужного кол-ва пременных
                             summ = fir - sec
-                        if self.pere == 3:
-                            summ = fir - sec - thir
-                        if self.pere == 4:
-                            summ = fir - sec - thir - four
-                        if summ >= 0:
-                            break
+                            if summ >= 0:
+                                break
+                            else:
+                                sec = random.randrange(1, (self.number + 1) // 2)
+                        elif self.pere == 3:
+                            summ = fir + sec + thir
+                            if summ >= 0:
+                                break
+                            else:
+                                thir = random.randrange(1, (self.number + 1) // 3)
+                        elif self.pere == 4:
+                            summ = fir + sec + thir + four
+                            if summ >= 0:
+                                break
+                            else:
+                                thir = random.randrange(1, (self.number + 1) // 3)
                     if self.pere == 2:
                         file.write('{0}) {1} - {2} =  \n'.format(j + 1,
                                                                  fir, sec, summ))
@@ -92,20 +127,30 @@ class variant:  # создания варианта с примерами
                         file.write('{0}) {1} - {2} - {3} - {4} =  \n'.format(j + 1,
                                                                              fir, sec, thir,
                                                                              four, summ))
-                if self.mul is True and sign == 3:  # примеры с *
+                elif self.mul is True and sign == 3:  # примеры с *
+                    fir = random.randrange(1, (self.number + 1) // 6)
+                    sec = 2
+                    thir = 3
+                    four = random.choice([0, 1])
                     while 0 == 0:
-                        fir = random.randrange(1, self.number)
-                        sec = random.randrange(1, self.number)
-                        thir = random.randrange(1, self.number)
-                        four = random.randrange(1, self.number)
                         if self.pere == 2:
                             summ = fir * sec
-                        if self.pere == 3:
+                            if summ <= self.number:
+                                break
+                            else:
+                                fir = random.randrange(1, (self.number + 1) // 6)
+                        elif self.pere == 3:
                             summ = fir * sec * thir
-                        if self.pere == 4:
+                            if summ <= self.number:
+                                break
+                            else:
+                                fir = random.randrange(1, (self.number + 1) // 6)
+                        elif self.pere == 4:
                             summ = fir * sec * thir * four
-                        if summ <= self.number:
-                            break
+                            if summ <= self.number:
+                                break
+                            else:
+                                fir = random.randrange(1, (self.number + 1) // 6)
                     if self.pere == 2:
                         file.write('{0}) {1} * {2} =  \n'.format(j + 1,
                                                                  fir, sec, summ))
@@ -117,10 +162,12 @@ class variant:  # создания варианта с примерами
                         file.write('{0}) {1} * {2} * {3} * {4} =  \n'.format(j + 1,
                                                                              fir, sec, thir,
                                                                              four, summ))
-                if self.div is True and sign == 4:  # примеры с /
+                elif self.div is True and sign == 4:  # примеры с /
                     while 0 == 0:
-                        fir = random.randrange(1, self.number)
-                        sec = random.randrange(1, self.number)
+                        fir = random.randrange((self.number + 1) // 2, (self.number + 1))
+                        if fir % 2 != 0:
+                            fir = fir - 1
+                        sec = random.randrange(2, 20, 2)
                         summ = fir % sec
                         if summ == 0:
                             break
@@ -165,13 +212,13 @@ class MyWidget(QMainWindow):
 
     def new_wi(self):  # функция перезапуска прграммы
         if self.flag != 0:
+            self.slider_display_1.setSliderPosition(0)
+            self.slider_display_2.setSliderPosition(0)
+            self.slider_display_3.setSliderPosition(0)
             self.display_1.setText('Кол-во заданий')
             self.display_2.setText('Максимальное значение')
             self.display_3.setText('Кол-во вариантов')
             self.start.setText('Сформировать файл')
-            self.slider_display_1.setSliderPosition(0)
-            self.slider_display_2.setSliderPosition(0)
-            self.slider_display_3.setSliderPosition(0)
             self.FileName.setText('')
             self.addition1.setChecked(False)
             self.subtraction1.setChecked(False)

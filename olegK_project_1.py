@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
 from PyQt5.QtCore import QBasicTimer
 
 
-class variant:
+class variant:  # создания варианта с примерами
     def __init__(self, count, vib, addi, sub,
                  mul, div, number, colvo,
                  signal, namef, per):
@@ -22,7 +22,7 @@ class variant:
         self.pere = per
 
     def make(self):
-        if self.vib is False:
+        if self.vib is False:  # проверка на кол-во файлов
             file = open(self.namef, 'w')
             a = 1
         else:
@@ -48,7 +48,7 @@ class variant:
                         sec = random.randrange(1, self.number)
                         thir = random.randrange(1, self.number)
                         four = random.randrange(1, self.number)
-                        if self.pere == 2:
+                        if self.pere == 2:  # выставление нужного кол-ва пременных
                             summ = fir + sec
                         if self.pere == 3:
                             summ = fir + sec + thir
@@ -132,7 +132,7 @@ class variant:
 
 class MyWidget(QMainWindow):
     def __init__(self):
-        super().__init__()
+        super().__init__()  # определение кнопок и их действий
         uic.loadUi('projectdis.ui', self)
         self.display_1.setText('Кол-во заданий')
         self.slider_display_1.valueChanged[int].connect(self.col_vo)
@@ -163,7 +163,7 @@ class MyWidget(QMainWindow):
         self.flag = 0
         self.per = 2
 
-    def new_wi(self):
+    def new_wi(self):  # функция перезапуска прграммы
         if self.flag != 0:
             self.display_1.setText('Кол-во заданий')
             self.display_2.setText('Максимальное значение')
@@ -192,7 +192,7 @@ class MyWidget(QMainWindow):
         else:
             pass
 
-    def addition(self):  # определение знака в примере
+    def addition(self):  # определение знака в примере +
         if self.addi is True:
             self.addi = False
             self.sign1.remove(1)
@@ -200,7 +200,7 @@ class MyWidget(QMainWindow):
             self.addi = True
             self.sign1.append(1)
 
-    def timerEvent(self, e):
+    def timerEvent(self, e):  # таймер
 
         if self.step >= 100:
             self.timer.stop()
@@ -209,14 +209,14 @@ class MyWidget(QMainWindow):
         self.step = self.step + 1
         self.pbar.setValue(self.step)
 
-    def doaction(self):
+    def doaction(self):  # действие загрузочной полосы
 
         if self.timer.isActive():
             self.timer.stop()
         else:
             self.timer.start(6, self)
 
-    def subtraction(self):
+    def subtraction(self):  # определение знака в примере -
         if self.sub is True:
             self.sub = False
             self.sign1.remove(2)
@@ -224,7 +224,7 @@ class MyWidget(QMainWindow):
             self.sub = True
             self.sign1.append(2)
 
-    def multiplication(self):
+    def multiplication(self):  # определение знака в примере *
         if self.mul is True:
             self.mul = False
             self.sign1.remove(3)
@@ -232,7 +232,7 @@ class MyWidget(QMainWindow):
             self.mul = True
             self.sign1.append(3)
 
-    def division(self):
+    def division(self):  # определение знака в примере /
         if self.div is True:
             self.div = False
             self.sign1.remove(4)
@@ -252,13 +252,13 @@ class MyWidget(QMainWindow):
         self.var = value
         self.display_3.setText(str(value))
 
-    def files(self):
+    def files(self):  # определение кол-ва файлов для записи
         if self.change_files.checkedButton().text() != 'Один':
             self.variant1 = True
         else:
             self.variant1 = False
 
-    def per_coun(self):
+    def per_coun(self):  # определение кол-ва переменных дщля примера
         if self.change_number.checkedButton().text() == '2':
             self.per = 2
         elif self.change_number.checkedButton().text() == '3':
@@ -266,7 +266,7 @@ class MyWidget(QMainWindow):
         elif self.change_number.checkedButton().text() == '4':
             self.per = 4
 
-    def run(self):
+    def run(self):  # запуск программы
         self.flag += 1
         name = self.FileName.text()
         if name == '':  # создание/открытие файла
